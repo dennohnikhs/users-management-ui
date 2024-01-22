@@ -1,18 +1,29 @@
 import React from "react";
-import { Container } from "react-bootstrap";
-import { ToastContainer } from "react-toastify";
-import NavigationBar from "../navbar/Navbar";
+import { Container, Nav, Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 
-function Layouts({ children }) {
+function NavigationBar() {
   return (
     <>
-      <Container fluid className="mt-5">
-        <ToastContainer />
-        <NavigationBar />
-        <Container className="py-5 ">{children}</Container>
-      </Container>
+      {" "}
+      <Navbar fixed="top" expand="lg" bg="light" variant="light">
+        <Container>
+          <Navbar.Brand as={NavLink} to="/" className="fw-bold fst-italic">
+            Simple Client
+          </Navbar.Brand>
+          <Nav className="flex-grow-1 justify-content-end">
+            <Nav.Link
+              as={NavLink}
+              to="/create-user"
+              className="badge fw-bold text-wrap flex-wrap bg-secondary p-2"
+            >
+              Create User
+            </Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
     </>
   );
 }
 
-export default Layouts;
+export default NavigationBar;

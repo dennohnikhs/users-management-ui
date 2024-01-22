@@ -3,8 +3,7 @@ import { Col, Container, Form, Row } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import * as userService from "../../utils/user.service";
 import "react-toastify/dist/ReactToastify.css";
-
-import Layouts from "../../layouts/TopNavigation";
+import Layout from "../../layouts/Layout";
 
 function CreateUser() {
   const [name, setName] = useState("");
@@ -26,8 +25,8 @@ function CreateUser() {
     try {
       const apiResponse = await userService.createUser(payload);
       if (apiResponse?.status) {
-        const getUserId = apiResponse?.user?.id;
-        toast.success(`User ${getUserId} Created Successfully`);
+        const getUserName = apiResponse?.user?.name;
+        toast.success(`User ${getUserName} Created Successfully`);
         setTimeout(() => {
           setCity(""), setName(""), setEmail(""), setGender(""), setCountry("");
         }, 2000);
@@ -64,7 +63,7 @@ function CreateUser() {
     }
   };
   return (
-    <Layouts className="mb-5">
+    <Layout className="mb-5">
       <Row className="justify-content-center">
         <Col lg={6}>
           <Form className="mt-5" id="form" onSubmit={submitForm}>
@@ -142,7 +141,7 @@ function CreateUser() {
         </Col>
       </Row>
       <ToastContainer />
-    </Layouts>
+    </Layout>
   );
 }
 

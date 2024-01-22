@@ -3,7 +3,7 @@ import { Card, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { BlueText } from "../../styles/styledComponents";
 import * as userService from "../../utils/user.service";
-import Layouts from "../../layouts/TopNavigation";
+import Layout from "../../layouts/Layout";
 function RetrieveUser() {
   const { userId } = useParams();
   const [user, setUser] = useState(null);
@@ -25,7 +25,7 @@ function RetrieveUser() {
 
   return (
     <>
-      <Layouts className="mt-5 mb-3">
+      <Layout className="mt-5 mb-3">
         {user ? (
           <Row className="d-flex flex-row flex-wrap justify-content-between">
             <Row className="justify-content-center">
@@ -48,7 +48,7 @@ function RetrieveUser() {
             user was not found
           </div>
         )}
-      </Layouts>
+      </Layout>
     </>
   );
 }

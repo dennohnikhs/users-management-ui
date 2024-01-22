@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import * as userService from "../../utils/user.service";
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
-import Layouts from "../../layouts/TopNavigation";
 import { BlueText, Title } from "../../styles/styledComponents";
 import { NavLink } from "react-router-dom";
+import Layout from "../../layouts/Layout";
 
 const UsersList = () => {
   const [users, setUsers] = useState([]);
@@ -22,7 +22,7 @@ const UsersList = () => {
   }, []);
 
   return (
-    <Layouts>
+    <Layout>
       <h3 className="text-center py-2 fw-bold fst-normal">Users</h3>
       <Row className="d-flex flex-row flex-wrap justify-content-between">
         {users.map((user) => (
@@ -70,7 +70,7 @@ const UsersList = () => {
           </Row>
         ))}
       </Row>
-    </Layouts>
+    </Layout>
   );
 };
 

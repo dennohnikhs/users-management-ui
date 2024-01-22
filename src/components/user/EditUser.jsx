@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Layouts from "../../layouts/TopNavigation";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { upperCaseFirstLetter } from "../../utils/string.helper";
+import Layout from "../../layouts/Layout";
 function EditUser() {
   const { userId } = useParams();
   const [name, setName] = useState("");
@@ -49,7 +50,6 @@ function EditUser() {
         toast.warn("The user couldn't be updated");
       }
     } catch (error) {
-      console.log("eroor ndo hii", error);
       if (error.response) {
         // If error has a response property
         const retrieveErrorMessage = () => {
@@ -73,7 +73,7 @@ function EditUser() {
     populateUserFields();
   }, [userId]);
   return (
-    <Layouts>
+    <Layout>
       <Form action="">
         <Row className="justify-content-center">
           <Col lg={6}>
@@ -138,7 +138,7 @@ function EditUser() {
           </Col>
         </Row>
       </Form>
-    </Layouts>
+    </Layout>
   );
 }
 

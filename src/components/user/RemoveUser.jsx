@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as userService from "../../utils/user.service";
-import Layouts from "../../layouts/TopNavigation";
 import { Button, Container, Row } from "react-bootstrap";
 import { toast } from "react-toastify";
+import Layout from "../../layouts/Layout";
 
 function RemoveUser() {
   const { userId } = useParams();
@@ -35,7 +35,7 @@ function RemoveUser() {
     window.location.href = "/";
   };
   return (
-    <Layouts>
+    <Layout>
       <Container className="text-center">
         <h3>Are you sure to remove this user?</h3>
         <Button variant="danger" onClick={submitAction} className="m-1">
@@ -45,7 +45,7 @@ function RemoveUser() {
           revert my action
         </Button>
       </Container>
-    </Layouts>
+    </Layout>
   );
 }
 
