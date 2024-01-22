@@ -5,6 +5,7 @@ import { NavLink } from "react-router-dom";
 function Footer() {
   return (
     <Container>
+      <hr />
       <Row>
         <Col md={{ span: 3, offset: 1 }}>
           <h2 className="text-decoration-underline">Contact</h2>
