@@ -29,6 +29,10 @@ export const removeUser = async (userId) => {
 export const retrieveAllUsers = async () => {
   const response = await axios.get(`${BASE_URL}/all`);
   const data = await response.data.users;
-
+  await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(data);
+    }, 2000);
+  });
   return data;
 };

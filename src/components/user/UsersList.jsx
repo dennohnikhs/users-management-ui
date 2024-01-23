@@ -3,13 +3,17 @@ import * as userService from "../../utils/user.service";
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import { BlueText, Title } from "../../styles/styledComponents";
 import { NavLink } from "react-router-dom";
+import { Instagram } from "react-content-loader";
 import Layout from "../../layouts/Layout";
+import UserCard from "./UserCard";
 
 const UsersList = () => {
   const [users, setUsers] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const fetchUsers = async () => {
     try {
+      setIsLoading(true);
       const usersFromApi = await userService.retrieveAllUsers();
       setUsers(usersFromApi);
     } catch (error) {
@@ -24,6 +28,8 @@ const UsersList = () => {
         return message;
       };
       setErrorMessage(retrieveErrorMessage);
+    } finally {
+      setIsLoading(false);
     }
   };
   useEffect(() => {
@@ -32,56 +38,29 @@ const UsersList = () => {
 
   return (
     <Layout>
-      <h3 className="text-center py-2 fw-bold fst-normal">Users</h3>
-      {errorMessage ? (
-        <h3 className="text-center text-danger text-bold">{errorMessage}</h3>
+      {isLoading ? (
+        <div className="text-center">
+          <Instagram />
+        </div>
       ) : (
-        <Row className="d-flex flex-row flex-wrap justify-content-between">
-          {users.map((user) => (
-            <Row key={user.id} className="justify-content-center">
-              <Col lg={4}>
-                <Card>
-                  <Card.Body>
-                    <Row className=" d-flex justify-content-between">
-                      <Col>
-                        <BlueText>{user.name}</BlueText>
-                        <BlueText>{user.email}</BlueText>
-                        <BlueText>
-                          {user?.city}-{user?.country}
-                        </BlueText>
-                      </Col>
-                      <Col>
-                        <Image
-                          src={user.profilePic}
-                          style={{ width: "100px", height: "100px" }}
-                          alt="User Profile Picture"
-                          roundedCircle
-                          fluid
-                        />
-                      </Col>
-                    </Row>
-                    <Container className="justify-content-between d-flex">
-                      <Button
-                        variant="secondary"
-                        as={NavLink}
-                        to={`/edit/${user.id}`}
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        variant="danger"
-                        as={NavLink}
-                        to={`/remove/${user.id}`}
-                      >
-                        delete
-                      </Button>
-                    </Container>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
-          ))}
-        </Row>
+        <>
+          {errorMessage ? (
+            <h3 className="text-center text-danger text-bold">
+              {errorMessage}
+            </h3>
+          ) : (
+            <>
+              <h4 className="text-center mb-3">Users</h4>
+              <Row className="justify-content-center ">
+                {users.map((user) => (
+                  <Col key={user.id} lg={4}>
+                    <UserCard user={user} />
+                  </Col>
+                ))}
+              </Row>
+            </>
+          )}
+        </>
       )}
     </Layout>
   );
